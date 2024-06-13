@@ -10,15 +10,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float maxZoomOut;
     [SerializeField] private float zoomInRate;
     [SerializeField] private float baseZoom;
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] private SpriteRenderer background;
+    private Vector2 lastPos;
+    
+    private void Start(){
         cam = GetComponent<Camera>();
     }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
+    private void FixedUpdate(){
         if(Input.GetKey(KeyCode.Space)){
             //zoom out camera
             if(cam.orthographicSize < maxZoomOut){
