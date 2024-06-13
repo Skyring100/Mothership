@@ -152,7 +152,17 @@ public class MothershipController : HealthSystem
     private void OutOfBoundsCheck(){
         if(MapInformation.IsOutOfBounds(transform.position)){
             Debug.Log("You are out of bounds");
-            transform.position = new Vector3();
+            float offsetMultiplier = 0.9f;
+            float newX = transform.position.x;
+            if(Mathf.Abs(newX) > MapInformation.GetMaxX()){
+                newX *= -1;
+            }
+            float newY = transform.position.y;
+            if(Mathf.Abs(newY) > MapInformation.GetMaxY()){
+                newY *= -1;
+            }
+
+            transform.position = new Vector3(newX*offsetMultiplier, newY*offsetMultiplier);
         }
     }
     public void ShipReturned(MinishipController s){
