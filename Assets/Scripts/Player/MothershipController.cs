@@ -22,13 +22,13 @@ public class MothershipController : HealthSystem
     [SerializeField] private List<MinishipController> miniShipsExisting = new List<MinishipController>();
     [SerializeField] private float regenRate;
     //current stats
-    private float movSpeed;
-    private int miniShipsLimit;
-    private float miniHealth;
-    private float miniSpeed;
-    private float miniDamage;
-    private float miniBulletSpeed;
-    private float miniShootDelay;
+    [SerializeField] private float movSpeed;
+    [SerializeField] private int miniShipsLimit;
+    [SerializeField] private float miniHealth;
+    [SerializeField] private float miniSpeed;
+    [SerializeField] private float miniDamage;
+    [SerializeField] private float miniBulletSpeed;
+    [SerializeField] private float miniShootDelay;
     //starting stats
     [SerializeField] public float startMovSpeed = 500;
     [SerializeField] public int startMiniShips = 3;

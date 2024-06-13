@@ -11,10 +11,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float zoomInRate;
     [SerializeField] private float baseZoom;
     [SerializeField] private SpriteRenderer background;
-    private Vector2 lastPos;
+    private Vector3 lastPos;
+    [SerializeField] private float backgroundSpeed;
     
     private void Start(){
         cam = GetComponent<Camera>();
+        lastPos = transform.position;
     }
     private void FixedUpdate(){
         if(Input.GetKey(KeyCode.Space)){
@@ -34,5 +36,11 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
+        //moving the background with the player
+        if(!transform.position.Equals(lastPos)){
+            Vector2 dir = transform.position - lastPos;
+            background.material.mainTextureOffset += dir * Time.deltaTime * backgroundSpeed; 
+        }
+        lastPos = transform.position;
     }
 }
