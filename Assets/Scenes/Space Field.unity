@@ -877,8 +877,8 @@ MonoBehaviour:
   - {fileID: 6184235491069879029, guid: 5bf475627530b2743b9b6384a3e6b838, type: 3}
   - {fileID: 8464061598189837563, guid: f7de229875fa7114f8a5e44851f72b49, type: 3}
   - {fileID: 4214638273377938060, guid: 0f328c70b3c9f8f45b97a3c2b3a83118, type: 3}
-  minSpawnWait: 5
-  maxSpawnWait: 15
+  minSpawnWait: 2
+  maxSpawnWait: 5
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,7 +891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4d1e02f5036fe448686cfbd487e08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelay: 10
+  spawnDelay: 15
   planetPrefab: {fileID: 5292835860397443135, guid: 3dbf904167c351845b3f22a70ff9d8e2, type: 3}
   startingPlanets: 50
 --- !u!114 &519420035

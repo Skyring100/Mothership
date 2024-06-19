@@ -117,9 +117,8 @@ public class MothershipController : HealthSystem
         Vector3 mouseLoc = cam.ScreenToWorldPoint(Input.mousePosition);
         if(Input.GetMouseButtonDown(1)){
             //get what the mouse clicked on
-            RaycastHit2D detections = Physics2D.Raycast(mouseLoc, Vector2.down);
+            RaycastHit2D detections = Physics2D.Raycast(mouseLoc, Vector3.back);
             if(detections){
-                //Debug.Log("You clicked on "+detections.collider.gameObject.name);
                 if(!Input.GetKey(KeyCode.LeftShift)){
                     if(detections.transform.CompareTag("Planet") || detections.transform.CompareTag("Enemy")){
                         SpawnMiniship(detections.transform);
@@ -248,7 +247,7 @@ public class MothershipController : HealthSystem
         statsUI.ChangeStat(ratio, 6);
     }
     private float CalcStatRatio(float starting,float current, float max){
-        Debug.Log("Starting: "+starting+" Current: "+current+" Max: "+max);
+        //Debug.Log("Starting: "+starting+" Current: "+current+" Max: "+max);
         return (current-starting)/max;
     }
 }

@@ -52,9 +52,9 @@ MonoBehaviour:
   planetHoverDist: 3
   playerHoverDist: 5
   enemyShipHoverDist: 3
-  movSpeed: 125
+  movSpeed: 299.1548
   bulletPrefab: {fileID: 3127819314200739141, guid: 79243bf7316bb0d4385d242b7906e8d4, type: 3}
-  shootDelay: 2
+  shootDelay: 1.923704
   bulletPrefabScript: {fileID: 1529588959295352863, guid: 79243bf7316bb0d4385d242b7906e8d4, type: 3}
 --- !u!212 &4992618561474353287
 SpriteRenderer:

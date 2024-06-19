@@ -163,6 +163,8 @@ public class MinishipController : HealthSystem
     {
         if(leader != null && !leader.IsDestroyed()){
             leader.SendMessage("ShipReturned", this);
+        }else{
+            Destroy(gameObject);
         }
         if(CompareTag("Enemy") && Random.Range(0,5) == 0){
             Instantiate(powerupPrefab, transform.position, Quaternion.identity);
