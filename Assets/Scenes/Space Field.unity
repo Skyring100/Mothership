@@ -909,7 +909,7 @@ MonoBehaviour:
   zoomOutRate: 0.25
   maxZoomOut: 20
   zoomInRate: 0.25
-  baseZoom: 8
+  baseZoom: 10
   background: {fileID: 1345270844}
   backgroundSpeed: 0.25
 --- !u!1 &602376490
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.048728816, g: 0.07406786, b: 0.23, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1580,7 +1580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.41, g: 0.037272714, b: 0.037272714, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2422,6 +2422,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2049291088}
     m_Modifications:
+    - target: {fileID: 3346053018126562934, guid: b8b41b6b005f43749a4452e3ddf91c58, type: 3}
+      propertyPath: backgroundColorModifier
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4787762356009709051, guid: b8b41b6b005f43749a4452e3ddf91c58, type: 3}
       propertyPath: m_Color.b
       value: 0.89830595
@@ -2517,6 +2521,18 @@ PrefabInstance:
     - target: {fileID: 7449837157092647102, guid: b8b41b6b005f43749a4452e3ddf91c58, type: 3}
       propertyPath: m_Name
       value: Mothership Speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854639154456927007, guid: b8b41b6b005f43749a4452e3ddf91c58, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854639154456927007, guid: b8b41b6b005f43749a4452e3ddf91c58, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854639154456927007, guid: b8b41b6b005f43749a4452e3ddf91c58, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
