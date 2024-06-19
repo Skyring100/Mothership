@@ -15,7 +15,7 @@ public class MapInformation
     public static int GetMaxY(){
         return mapSize[1];
     }
-    public static Vector3 RandomLocation(){
-        return new Vector3(randGen.Next(-mapSize[0], mapSize[0]), randGen.Next(-mapSize[1], mapSize[1]));
+    public static Vector3Int RandomLocation(){
+        return new Vector3Int(randGen.Next(-mapSize[0], mapSize[0]), randGen.Next(-mapSize[1], mapSize[1]));
     }
 }
