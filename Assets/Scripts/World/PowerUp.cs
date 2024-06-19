@@ -8,7 +8,7 @@ public class PowerUp : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")){
             MothershipController ship = other.GetComponent<MothershipController>();
-            int choice = 7;//Random.Range(0,8);
+            int choice = Random.Range(0,8);
             switch(choice){
                 case 0:
                     ship.ChangeMotherHealth(Random.Range(ship.startMaxHealth,ship.maxMaxHealth*maxUpgradeMagnitude));
