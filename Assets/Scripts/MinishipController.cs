@@ -106,7 +106,7 @@ public class MinishipController : HealthSystem
                 break;
         }
         objectiveOffsets.Push(destinationOffset);
-        Debug.Log("Leader is "+leader.gameObject.name);
+        //Debug.Log("Leader is "+leader.gameObject.name);
     }
     public void ClearObjectives(){
         objectives.Clear();
@@ -134,7 +134,7 @@ public class MinishipController : HealthSystem
         }
     }
     private void NoLeaderSulk(){
-        Debug.Log(gameObject.name+" has no leader");
+        
     }
     public void SetSpeed(float s){
         movSpeed = s;
@@ -161,7 +161,9 @@ public class MinishipController : HealthSystem
 
     protected override void OnDeath()
     {
-        leader.SendMessage("ShipReturned", this);
+        if(leader != null && !leader.IsDestroyed()){
+            leader.SendMessage("ShipReturned", this);
+        }
         if(CompareTag("Enemy") && Random.Range(0,5) == 0){
             Instantiate(powerupPrefab, transform.position, Quaternion.identity);
         }
