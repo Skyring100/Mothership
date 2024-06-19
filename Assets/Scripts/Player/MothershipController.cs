@@ -244,7 +244,7 @@ public class MothershipController : HealthSystem
         Debug.Log("Change by "+v);
         miniShootDelay -= v;
         miniShipPrefabScript.SetShootDelay(miniShootDelay);
-        float ratio = CalcStatRatio(maxMiniShootDelay, miniShootDelay, startMiniShootDelay);
+        float ratio = CalcStatRatio(startMiniShootDelay, miniShootDelay, 1/maxMiniShootDelay);
         Debug.Log("Ratio: "+ratio);
         statsUI.ChangeStat(ratio, 6);
     }
