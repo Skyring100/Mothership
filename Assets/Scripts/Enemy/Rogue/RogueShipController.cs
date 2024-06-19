@@ -13,7 +13,7 @@ public class RogueShipController : HealthSystem
     [SerializeField] private float wanderThrustDelay;
     [SerializeField] private float chaseThrustDelay;
     private bool thrusterReady;
-    private Vector3Int wanderLocation;
+    private Vector3 wanderLocation;
     private bool seesTarget;
     private Rigidbody2D rb;
     [SerializeField] private GameObject bulletPrefab;
@@ -80,7 +80,7 @@ public class RogueShipController : HealthSystem
         }
     }
     private void DoWander(){
-        if((int)transform.position.x != wanderLocation.x && (int)transform.position.y != wanderLocation.y){
+        if((int)transform.position.x != (int)wanderLocation.x && (int)transform.position.y != (int)wanderLocation.y){
             //continue moving to location
             TryThrust(wanderLocation - transform.position);
         }else{
