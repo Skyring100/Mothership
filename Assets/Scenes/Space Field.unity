@@ -1037,6 +1037,9 @@ MonoBehaviour:
   goHereMarkerPrefab: {fileID: 8641900795125584402, guid: d9eac0eba1472304cb30f9d37faa1c6c, type: 3}
   statsUI: {fileID: 1353716675}
   landingDocs: {fileID: 305856180}
+  targetableTags:
+  - Enemy
+  - Planet
 --- !u!212 &602376494
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -51,6 +51,7 @@ public class MothershipController : HealthSystem
     [SerializeField] private GameObject goHereMarkerPrefab;
     [SerializeField] private StatsUIController statsUI;
     [SerializeField] private Transform landingDocs;
+    [SerializeField] private string[] targetableTags;
     private void Awake() {
         Physics2D.queriesHitTriggers = false;
     }
@@ -83,16 +84,6 @@ public class MothershipController : HealthSystem
     {
         DoMovement();
         ClickCheck();
-        if(Input.GetKeyDown(KeyCode.E)){
-            if(miniShipsExisting.Count < miniShipsLimit){
-                 Vector3 mouseLoc = cam.ScreenToWorldPoint(Input.mousePosition);
-                mouseLoc.z = 0;
-                Transform marker = Instantiate(goHereMarkerPrefab, mouseLoc, Quaternion.identity).transform;
-                SpawnMiniship(marker);
-            }else{
-                statsUI.MiniShipBarAnimation();
-            }
-        }
         if(Input.GetKeyDown(KeyCode.R)){
             foreach(MinishipController script in miniShipsExisting){
                 script.ClearObjectives();
@@ -115,27 +106,41 @@ public class MothershipController : HealthSystem
     }
     private void ClickCheck(){
         Vector3 mouseLoc = cam.ScreenToWorldPoint(Input.mousePosition);
+        if(Input.GetMouseButtonDown(0)){
+            //get what the mouse clicked on
+            RaycastHit2D detections = Physics2D.Raycast(mouseLoc, Vector3.back);
+            //check if there is either nothing clicked or the clicked object is not targetable
+            if(!detections || !IsTargetable(detections.transform)){
+                //if nothing valid was clicked on, simply send a ship over to that location
+                mouseLoc.z = 0;
+                Transform marker = Instantiate(goHereMarkerPrefab, mouseLoc, Quaternion.identity).transform;
+                bool didSpawn = SpawnMiniship(marker);
+                if(!didSpawn){
+                    Destroy(marker.gameObject);
+                }
+            }else{
+                //send the ship to attack the target
+                SpawnMiniship(detections.transform);
+            }
+        }
         if(Input.GetMouseButtonDown(1)){
             //get what the mouse clicked on
             RaycastHit2D detections = Physics2D.Raycast(mouseLoc, Vector3.back);
-            if(detections){
-                if(!Input.GetKey(KeyCode.LeftShift)){
-                    if(detections.transform.CompareTag("Planet") || detections.transform.CompareTag("Enemy")){
-                        SpawnMiniship(detections.transform);
-                    }
-                }else{
-                    //clicked on something thats minable or an enemy
-                    if(detections.transform.CompareTag("Planet") || detections.transform.CompareTag("Enemy")){
-                        //use all miniships to target what the player clicked on
-                        foreach(MinishipController script in miniShipsExisting){
-                            script.StartObjective(new MinionTargetInfo(detections.transform, landingDocs));
-                        }
-                    }else if(detections.transform.CompareTag("Marker")){
-                        Destroy(detections.transform.gameObject);
-                    }
+            if(detections && IsTargetable(detections.transform)){
+                //use all miniships to target what the player clicked on
+                foreach(MinishipController script in miniShipsExisting){
+                    script.StartObjective(new MinionTargetInfo(detections.transform, landingDocs));
                 }
             }
         }
+    }
+    private bool IsTargetable(Transform target){
+        foreach(string tag in targetableTags){
+            if(target.CompareTag(tag)){
+                return true;
+            }
+        }
+        return false;
     }
     private void StatsUIToggle(){
         if(!statsUI.IsShowingStats()){
@@ -179,14 +184,16 @@ public class MothershipController : HealthSystem
         //update the UI
         statsUI.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
     }
-    private void SpawnMiniship(Transform miniShipTarget){
+    private bool SpawnMiniship(Transform miniShipTarget){
         if(miniShipsExisting.Count < miniShipsLimit){
             MinishipController spawnedShipScript = Instantiate(miniShipPrefab, new Vector2(transform.position.x, transform.position.y + miniSpawnOffset), transform.rotation).GetComponent<MinishipController>();
             spawnedShipScript.StartObjective(new MinionTargetInfo(miniShipTarget, landingDocs));
             miniShipsExisting.Add(spawnedShipScript);
             statsUI.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
+            return true;
         }else{
             statsUI.MiniShipBarAnimation();
+            return false;
         }
     }
     private void ExplodeAllShips(){
