@@ -119,7 +119,7 @@ public class MothershipController : HealthSystem
             //get what the mouse clicked on
             RaycastHit2D detections = Physics2D.Raycast(mouseLoc, Vector2.down);
             if(detections){
-                Debug.Log("You clicked on "+detections.collider.gameObject.name);
+                //Debug.Log("You clicked on "+detections.collider.gameObject.name);
                 if(!Input.GetKey(KeyCode.LeftShift)){
                     if(detections.transform.CompareTag("Planet") || detections.transform.CompareTag("Enemy")){
                         SpawnMiniship(detections.transform);
@@ -188,7 +188,6 @@ public class MothershipController : HealthSystem
             statsUI.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
         }else{
             statsUI.MiniShipBarAnimation();
-            Debug.Log("No mini ships left");
         }
     }
     private void ExplodeAllShips(){
@@ -242,9 +241,10 @@ public class MothershipController : HealthSystem
         statsUI.ChangeStat(CalcStatRatio(startMiniBulletSpeed, miniBulletSpeed, maxMiniBulletSpeed), 5);
     }
     public void ChangeMiniShootDelay(float v){
-        miniShootDelay += v;
+        Debug.Log("Change by "+v);
+        miniShootDelay -= v;
         miniShipPrefabScript.SetShootDelay(miniShootDelay);
-        float ratio = 1-((miniShootDelay-maxMiniShootDelay)/startMiniShootDelay);
+        float ratio = CalcStatRatio(maxMiniShootDelay, miniShootDelay, startMiniShootDelay);
         Debug.Log("Ratio: "+ratio);
         statsUI.ChangeStat(ratio, 6);
     }

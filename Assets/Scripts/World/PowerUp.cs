@@ -8,7 +8,7 @@ public class PowerUp : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")){
             MothershipController ship = other.GetComponent<MothershipController>();
-            int choice = Random.Range(0,8);
+            int choice = 7;//Random.Range(0,8);
             switch(choice){
                 case 0:
                     ship.ChangeMotherHealth(Random.Range(ship.startMaxHealth,ship.maxMaxHealth*maxUpgradeMagnitude));
@@ -32,7 +32,7 @@ public class PowerUp : MonoBehaviour
                     ship.ChangeMiniBulletSpeed(Random.Range(ship.startMiniBulletSpeed,ship.maxMiniBulletSpeed*maxUpgradeMagnitude));
                     break;
                 case 7:
-                    ship.ChangeMiniShootDelay(Random.Range(ship.startMiniShootDelay,ship.maxMiniShootDelay*maxUpgradeMagnitude));
+                    ship.ChangeMiniShootDelay(Random.Range(0.05f,0.7f));
                     break;
             }
             Destroy(gameObject);
