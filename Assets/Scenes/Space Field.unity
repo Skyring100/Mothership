@@ -871,7 +871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b39488e0dd58642ad38c77ec2cc9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnOffset: 1.75
   enemyPrefabs:
   - {fileID: 423326266840168960, guid: db4b5cffd8755f44b8083037427d508c, type: 3}
   - {fileID: 6184235491069879029, guid: 5bf475627530b2743b9b6384a3e6b838, type: 3}
@@ -879,6 +878,8 @@ MonoBehaviour:
   - {fileID: 4214638273377938060, guid: 0f328c70b3c9f8f45b97a3c2b3a83118, type: 3}
   minSpawnWait: 2
   maxSpawnWait: 5
+  maxSpawnOffset: 36
+  minSpawnOffset: 35
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0

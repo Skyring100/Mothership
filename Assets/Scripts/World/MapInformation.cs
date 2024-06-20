@@ -1,12 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class MapInformation
 {
     private static int[] mapSize = new int[]{100,100};
     public static bool IsOutOfBounds(Vector3 pos){
-        return pos.x > mapSize[0] || pos.x < -mapSize[0] || pos.y > mapSize[1] || pos.y < -mapSize[1];
+        return Mathf.Abs(pos.x) > mapSize[0] || Mathf.Abs(pos.y) > mapSize[1];
+    }
+    public static void MakeInBounds(Vector3 pos){
+        pos.x = Mathf.Min(Mathf.Max(-mapSize[0],pos.x), mapSize[0]);
+        pos.y = Mathf.Min(Mathf.Max(-mapSize[1],pos.y), mapSize[1]);
     }
     public static int GetMaxX(){
         return mapSize[0];
@@ -20,9 +23,39 @@ public class MapInformation
     public static Vector3 RandomLocationAround(Vector3 aroundThis, float offset){
         float x = Random.Range(aroundThis.x-offset, aroundThis.x+offset);
         float y = Random.Range(aroundThis.y-offset, aroundThis.y+offset);
-        //make sure these x and y coordinates don't go out of bounds
-        x = Mathf.Min(Mathf.Max(-mapSize[0],x), mapSize[0]);
-        y = Mathf.Min(Mathf.Max(-mapSize[1],y), mapSize[1]);
-        return new Vector3(x,y);
+        Vector3 randLoc = new Vector3(x,y);
+        MakeInBounds(randLoc);
+        return randLoc;
     }
+    /*
+    public static Vector3 RandomLocationAwayFrom(Vector3 pos, float minOffset, float maxOffset){
+        Assert.IsTrue(minOffset < maxOffset);
+        float x;
+        float y;
+
+        if(Random.Range(0,2) == 0){
+            x = Random.Range(pos.x+minOffset, pos.x+maxOffset);
+        }else{
+            x = Random.Range(pos.x-minOffset, pos.x-maxOffset);
+        }
+        if(Random.Range(0,2) == 0){
+            y = Random.Range(pos.y+minOffset, pos.y+maxOffset);
+        }else{
+            y = Random.Range(pos.y-minOffset, pos.y-maxOffset);
+        }
+        Vector3 randLoc = new Vector3(x,y);
+        if(IsOutOfBounds(randLoc)){
+            //correct the invalid axis
+            if(Mathf.Abs(randLoc.x) > mapSize[0]){
+                int flipDir = (int)(-randLoc.x/randLoc.x);
+                randLoc.x -= minOffset*2 * flipDir; 
+            }
+            if(Mathf.Abs(randLoc.y) > mapSize[1]){
+                int flipDir = (int)(-randLoc.y/randLoc.y);
+                randLoc.y -= minOffset*2 * flipDir; 
+            }
+        }
+        return randLoc;
+    }
+    */
 }

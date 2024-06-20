@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class EnemySpawnController : MonoBehaviour
 {
-    [SerializeField] private float spawnOffset;
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private int minSpawnWait = 5;
     [SerializeField] private int maxSpawnWait = 15;
+    private Transform player;
+    [SerializeField] private float maxSpawnOffset;
+    //[SerializeField] private float minSpawnOffset;
     private bool readyToSpawn;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
+        player = transform.parent;
         StartCoroutine(DoSpawnCooldown());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         if(readyToSpawn){
             GameObject enemy = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-            Instantiate(enemy, MapInformation.RandomLocation(), Quaternion.identity);
+            Vector3 spawnPos = MapInformation.RandomLocation();
+            //Debug.Log(spawnPos);
+            Instantiate(enemy, spawnPos, Quaternion.identity);
             StartCoroutine(DoSpawnCooldown());
         }
     }
