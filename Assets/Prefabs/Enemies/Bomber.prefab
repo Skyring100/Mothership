@@ -54,7 +54,7 @@ MonoBehaviour:
   normalColor: {r: 0, g: 0, b: 0, a: 1}
   flashColor: {r: 0.40784314, g: 0.039215688, b: 0.039215688, a: 1}
   flashDur: 0.25
-  minDelayTilFlash: 8
+  nextFlashDelay: 8
 --- !u!212 &4919526113382354269
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -215,8 +215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f353e5aa707cc439d0882e23e59f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRadius: 10
-  growRate: 4
+  maxRadius: 15
+  growRate: 5
   explosionLifetime: 0.5
   explosionDamage: 19
 --- !u!212 &4433768589541483092
