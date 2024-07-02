@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   powerupPrefab: {fileID: 4854230534349597422, guid: e8eba87f9bd066044b1832ccc00569ed, type: 3}
-  chargeForce: 9000
+  chargeForce: 50000
   damage: 5
   chargeDelay: 2
   dealDamImmunityDur: 0

@@ -27,12 +27,15 @@ public class BonkerEnemyController : HealthSystem
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 movDir;
         if(detectScript.HasDetection()){
-            if(canCharge){
-                Vector3 direction = detectScript.GetDetection().position - transform.position;
-                rb.AddForce(direction.normalized * chargeForce * Time.deltaTime);
-                StartCoroutine(DoChargeCooldown());
-            }
+            movDir = detectScript.GetDetection().position - transform.position;
+        }else{
+            movDir = MapInformation.RandomLocation() - transform.position;
+        }
+        if(canCharge){
+            rb.AddForce(movDir.normalized * chargeForce * Time.deltaTime);
+            StartCoroutine(DoChargeCooldown());
         }
     }
     private IEnumerator DoChargeCooldown(){
