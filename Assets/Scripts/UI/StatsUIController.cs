@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -26,6 +27,9 @@ public class StatsUIController : MonoBehaviour
     [SerializeField] private GameObject statPopupPanel;
     private TextMeshProUGUI statText;
     private IEnumerator hideStatTimer;
+    //warning screen
+    [SerializeField] private RectTransform warningScreen; 
+
     private void Awake() {
         healthBarValue = healthBar.GetChild(0).GetComponent<RectTransform>();
         miniShipBarValue = miniShipBar.GetChild(0).GetComponent<RectTransform>();
@@ -34,8 +38,9 @@ public class StatsUIController : MonoBehaviour
         HideStatText();
         statText = statPopupPanel.GetComponentInChildren<TextMeshProUGUI>();
         hideStatTimer = null;
+        warningScreen.gameObject.SetActive(false);
     }
-    //Check if there are size animations to do
+    //Check if there are animations to do
     private void Update() {
         if(doHealthBarAnim){
             doHealthBarAnim = BounceBarOut(healthBar, healthBarAnimRate, healthBarAnimSize);
@@ -141,5 +146,11 @@ public class StatsUIController : MonoBehaviour
         if(hideStatTimer != null){
             StopCoroutine(hideStatTimer);
         }
+    }
+    public void ShowWarningScreen(){
+        warningScreen.gameObject.SetActive(true);
+    }
+    public void HideWarningScreen(){
+        warningScreen.gameObject.SetActive(false);
     }
 }

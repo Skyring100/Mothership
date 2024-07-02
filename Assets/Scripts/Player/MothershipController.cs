@@ -52,6 +52,8 @@ public class MothershipController : HealthSystem
     [SerializeField] private StatsUIController statsUI;
     [SerializeField] private Transform landingDocs;
     [SerializeField] private string[] targetableTags;
+    private bool currentlyOutOfBounds;
+    [SerializeField] private float outOfBoundsTimer;
     private void Awake() {
         Physics2D.queriesHitTriggers = false;
     }
@@ -78,6 +80,8 @@ public class MothershipController : HealthSystem
         miniShipPrefabScript.SetShootDelay(miniShootDelay);
         statsUI.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
         InvokeRepeating("DoPassiveRegen",regenRate, regenRate);
+
+        currentlyOutOfBounds = false;
     }
 
     void Update()
@@ -155,19 +159,37 @@ public class MothershipController : HealthSystem
     }
     private void OutOfBoundsCheck(){
         if(MapInformation.IsOutOfBounds(transform.position)){
-            Debug.Log("You are out of bounds");
-            float offsetMultiplier = 0.9f;
-            float newX = transform.position.x;
-            if(Mathf.Abs(newX) > MapInformation.GetMaxX()){
-                newX *= -1;
+            //check if this is the first time the player has gone out of bounds
+            if(!currentlyOutOfBounds){
+                currentlyOutOfBounds = true;
+                statsUI.ShowWarningScreen();
+                StartCoroutine("OutOfBoundsCountdown");
             }
-            float newY = transform.position.y;
-            if(Mathf.Abs(newY) > MapInformation.GetMaxY()){
-                newY *= -1;
+        }else{
+            //the player is no longer out of bounds so update accordingly
+            if(currentlyOutOfBounds){
+                currentlyOutOfBounds = false;
+                statsUI.HideWarningScreen();
+                StopCoroutine("OutOfBoundsCountdown");
             }
-
-            transform.position = new Vector3(newX*offsetMultiplier, newY*offsetMultiplier);
         }
+    }
+    private IEnumerator OutOfBoundsCountdown(){
+        yield return new WaitForSeconds(outOfBoundsTimer);
+        MoveInBounds();
+    }
+    private void MoveInBounds(){
+        float offsetMultiplier = 0.9f;
+        float newX = transform.position.x;
+        if(Mathf.Abs(newX) > MapInformation.GetMaxX()){
+            newX *= -1;
+        }
+        float newY = transform.position.y;
+        if(Mathf.Abs(newY) > MapInformation.GetMaxY()){
+            newY *= -1;
+        }
+
+        transform.position = new Vector3(newX*offsetMultiplier, newY*offsetMultiplier);
     }
     public void ShipReturned(MinishipController s){
         bool ownsShip = false;
