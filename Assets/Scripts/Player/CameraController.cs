@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
 
     private Camera cam;
+    private Transform player;
     [SerializeField] private float zoomOutRate;
     [SerializeField] private float maxZoomOut;
     [SerializeField] private float zoomInRate;
@@ -15,10 +17,14 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float backgroundSpeed;
     
     private void Start(){
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         cam = GetComponent<Camera>();
         lastPos = transform.position;
     }
     private void FixedUpdate(){
+        if(!player.IsDestroyed()){
+            transform.position = new Vector3(player.position.x, player.position.y, -10);
+        }
         if(Input.GetKey(KeyCode.Space)){
             //zoom out camera
             if(cam.orthographicSize < maxZoomOut){

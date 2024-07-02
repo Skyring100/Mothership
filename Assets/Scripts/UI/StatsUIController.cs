@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatsUIController : MonoBehaviour
+public class PlayerUIController : MonoBehaviour
 {
     [SerializeField] private float infoBarFullSize;
     //health bar
@@ -33,6 +33,7 @@ public class StatsUIController : MonoBehaviour
     [SerializeField] private Image blackoutScreen;
     private bool doBlackout;
     [SerializeField] private float blackoutRate;
+    [SerializeField] private RectTransform deathScreen;
     private void Awake() {
         healthBarValue = healthBar.GetChild(0).GetComponent<RectTransform>();
         miniShipBarValue = miniShipBar.GetChild(0).GetComponent<RectTransform>();
@@ -43,6 +44,7 @@ public class StatsUIController : MonoBehaviour
         hideStatTimer = null;
         warningScreen.gameObject.SetActive(false);
         blackoutScreen.gameObject.SetActive(false);
+        deathScreen.gameObject.SetActive(false);
     }
     //Check if there are animations to do
     private void Update() {
@@ -172,5 +174,8 @@ public class StatsUIController : MonoBehaviour
         blackoutScreen.color = blackoutShade;
         blackoutScreen.gameObject.SetActive(true);
         doBlackout = true;
+    }
+    public void ShowDeathScreen(){
+        deathScreen.gameObject.SetActive(true);
     }
 }

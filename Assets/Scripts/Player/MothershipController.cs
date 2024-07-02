@@ -48,7 +48,7 @@ public class MothershipController : HealthSystem
     [SerializeField] public float maxMiniShootDelay;
 
     [SerializeField] private GameObject goHereMarkerPrefab;
-    [SerializeField] private StatsUIController statsUI;
+    [SerializeField] private PlayerUIController ui;
     [SerializeField] private Transform landingDocs;
     [SerializeField] private string[] targetableTags;
     private bool currentlyOutOfBounds;
@@ -59,7 +59,7 @@ public class MothershipController : HealthSystem
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        cam = GetComponentInChildren<Camera>();
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         miniShipPrefabScript = miniShipPrefab.GetComponent<MinishipController>();
         
         SetMaxHealth(startMaxHealth);
@@ -77,7 +77,7 @@ public class MothershipController : HealthSystem
         miniShipPrefabScript.SetDamage(miniDamage);
         miniShipPrefabScript.SetBulletSpeed(miniBulletSpeed);
         miniShipPrefabScript.SetShootDelay(miniShootDelay);
-        statsUI.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
+        ui.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
         InvokeRepeating("DoPassiveRegen",regenRate, regenRate);
 
         currentlyOutOfBounds = false;
@@ -146,29 +146,29 @@ public class MothershipController : HealthSystem
         return false;
     }
     private void StatsUIToggle(){
-        if(!statsUI.IsShowingStats()){
-            statsUI.ShowStats();
+        if(!ui.IsShowingStats()){
+            ui.ShowStats();
         }else{
-            statsUI.HideStats();
+            ui.HideStats();
         }
     }
     private void DoPassiveRegen(){
         HealEntity(1);
-        statsUI.ChangePlayerHealth(GetHealth()/GetMaxHealth(), false);
+        ui.ChangePlayerHealth(GetHealth()/GetMaxHealth(), false);
     }
     private void OutOfBoundsCheck(){
         if(MapInformation.IsOutOfBounds(transform.position)){
             //check if this is the first time the player has gone out of bounds
             if(!currentlyOutOfBounds){
                 currentlyOutOfBounds = true;
-                statsUI.ShowWarningScreen();
+                ui.ShowWarningScreen();
                 StartCoroutine("OutOfBoundsCountdown");
             }
         }else{
             //the player is no longer out of bounds so update accordingly
             if(currentlyOutOfBounds){
                 currentlyOutOfBounds = false;
-                statsUI.HideWarningScreen();
+                ui.HideWarningScreen();
                 StopCoroutine("OutOfBoundsCountdown");
             }
         }
@@ -176,8 +176,8 @@ public class MothershipController : HealthSystem
     private IEnumerator OutOfBoundsCountdown(){
         yield return new WaitForSeconds(outOfBoundsTimer);
         MoveInBounds();
-        statsUI.HideWarningScreen();
-        statsUI.DoBlackout();
+        ui.HideWarningScreen();
+        ui.DoBlackout();
     }
     private void MoveInBounds(){
         float offsetMultiplier = 0.9f;
@@ -205,17 +205,17 @@ public class MothershipController : HealthSystem
             Destroy(s.gameObject);
         }
         //update the UI
-        statsUI.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
+        ui.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
     }
     private bool SpawnMiniship(Transform miniShipTarget){
         if(miniShipsExisting.Count < miniShipsLimit){
             MinishipController spawnedShipScript = Instantiate(miniShipPrefab, new Vector2(transform.position.x, transform.position.y + miniSpawnOffset), transform.rotation).GetComponent<MinishipController>();
             spawnedShipScript.StartObjective(new MinionTargetInfo(miniShipTarget, landingDocs));
             miniShipsExisting.Add(spawnedShipScript);
-            statsUI.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
+            ui.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
             return true;
         }else{
-            statsUI.MiniShipBarAnimation();
+            ui.MiniShipBarAnimation();
             return false;
         }
     }
@@ -224,57 +224,60 @@ public class MothershipController : HealthSystem
             Destroy(script.gameObject);
         }
         miniShipsExisting.Clear();
-        statsUI.ChangeShipCount(0, miniShipsLimit);
+        ui.ChangeShipCount(0, miniShipsLimit);
     }
     protected override void OnDamage()
     {
-        statsUI.ChangePlayerHealth(GetHealth()/GetMaxHealth());
+        ui.ChangePlayerHealth(GetHealth()/GetMaxHealth());
     }
 
     protected override void OnDeath()
     {
         Debug.Log("You died");
+        Destroy(gameObject);
+        ui.DoBlackout();
+        ui.ShowDeathScreen();
     }
 
     public void ChangeMotherHealth(float h){
         SetMaxHealth(GetMaxHealth()+h);
-        statsUI.ChangePlayerHealth(GetHealth()/GetMaxHealth());
+        ui.ChangePlayerHealth(GetHealth()/GetMaxHealth());
     }
     public void ChangeMotherSpeed(float s){
         movSpeed += s;
-        statsUI.ChangeStat(CalcStatRatio(startMovSpeed, movSpeed, maxMovSpeed), 0);
+        ui.ChangeStat(CalcStatRatio(startMovSpeed, movSpeed, maxMovSpeed), 0);
     }
     public void ChangeMaxShips(int ships){
         miniShipsLimit += ships;
-        statsUI.ChangeStat(CalcStatRatio(startMiniShips, miniShipsLimit, maxMiniShips), 1);
-        statsUI.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
+        ui.ChangeStat(CalcStatRatio(startMiniShips, miniShipsLimit, maxMiniShips), 1);
+        ui.ChangeShipCount(miniShipsExisting.Count, miniShipsLimit);
     }
     public void ChangeMiniHealth(float v){
         miniHealth += v;
         miniShipPrefabScript.SetMaxHealth(miniHealth);
-        statsUI.ChangeStat(CalcStatRatio(startMiniHealth, miniHealth, maxMiniHealth), 2);
+        ui.ChangeStat(CalcStatRatio(startMiniHealth, miniHealth, maxMiniHealth), 2);
     }
     public void ChangeMiniSpeed(float v){
         miniSpeed += v;  
         miniShipPrefabScript.SetSpeed(miniSpeed);
-        statsUI.ChangeStat(CalcStatRatio(startMiniSpeed, miniSpeed, maxMiniSpeed), 3);
+        ui.ChangeStat(CalcStatRatio(startMiniSpeed, miniSpeed, maxMiniSpeed), 3);
     }
     public void ChangeMiniDamage(float v){
         miniDamage += v;
         miniShipPrefabScript.SetDamage(miniDamage);
-        statsUI.ChangeStat(CalcStatRatio(startMiniDamage, miniDamage, maxMiniDamage), 4);
+        ui.ChangeStat(CalcStatRatio(startMiniDamage, miniDamage, maxMiniDamage), 4);
     }
     public void ChangeMiniBulletSpeed(float v){
         miniBulletSpeed += v;
         miniShipPrefabScript.SetBulletSpeed(miniBulletSpeed);
-        statsUI.ChangeStat(CalcStatRatio(startMiniBulletSpeed, miniBulletSpeed, maxMiniBulletSpeed), 5);
+        ui.ChangeStat(CalcStatRatio(startMiniBulletSpeed, miniBulletSpeed, maxMiniBulletSpeed), 5);
     }
     public void ChangeMiniShootDelay(float v){
         Debug.Log("Change by "+v);
         miniShootDelay -= v;
         miniShipPrefabScript.SetShootDelay(miniShootDelay);
         float ratio = CalcStatRatio(startMiniShootDelay, miniShootDelay, 1/maxMiniShootDelay);
-        statsUI.ChangeStat(ratio, 6);
+        ui.ChangeStat(ratio, 6);
     }
     private float CalcStatRatio(float starting,float current, float max){
         //Debug.Log("Starting: "+starting+" Current: "+current+" Max: "+max);

@@ -5,11 +5,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class StatBarInterations : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler{
-    private StatsUIController crtler; 
+    private PlayerUIController crtler; 
     private Color color;
     private static float backgroundModif = 0.2f;
     private void Start() {
-        crtler = GameObject.Find("Player Stats UI").GetComponent<StatsUIController>();
+        crtler = GameObject.Find("Player Stats UI").GetComponent<PlayerUIController>();
         color = transform.GetChild(0).GetComponent<Image>().color;
         //set the background color to be a darkened version of the stat color
         GetComponent<Image>().color = new Color(color.r*backgroundModif, color.g*backgroundModif, color.b*backgroundModif);
