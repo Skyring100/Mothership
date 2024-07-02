@@ -189,8 +189,8 @@ public class MothershipController : HealthSystem
         if(Mathf.Abs(newY) > MapInformation.GetMaxY()){
             newY *= -1;
         }
-
-        transform.position = new Vector3(newX*offsetMultiplier, newY*offsetMultiplier);
+        transform.position = MapInformation.MakeInBounds(new Vector3(newX, newY))*offsetMultiplier;
+        currentlyOutOfBounds = true;
     }
     public void ShipReturned(MinishipController s){
         bool ownsShip = false;

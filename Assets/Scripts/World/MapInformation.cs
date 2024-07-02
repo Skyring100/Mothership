@@ -7,9 +7,8 @@ public class MapInformation
     public static bool IsOutOfBounds(Vector3 pos){
         return Mathf.Abs(pos.x) > mapSize[0] || Mathf.Abs(pos.y) > mapSize[1];
     }
-    public static void MakeInBounds(Vector3 pos){
-        pos.x = Mathf.Min(Mathf.Max(-mapSize[0],pos.x), mapSize[0]);
-        pos.y = Mathf.Min(Mathf.Max(-mapSize[1],pos.y), mapSize[1]);
+    public static Vector3 MakeInBounds(Vector3 pos){
+        return new Vector3(Mathf.Min(Mathf.Max(-mapSize[0],pos.x), mapSize[0]),Mathf.Min(Mathf.Max(-mapSize[1],pos.y), mapSize[1]));
     }
     public static int GetMaxX(){
         return mapSize[0];
