@@ -7,7 +7,6 @@ public class MothershipController : HealthSystem
 {
     /*
     TODO
-    -Out of bounds change
     -Make mini ships auto target enemies
     -add visuals for when an entitiy is damaged
     -Powerup drops to more enemies

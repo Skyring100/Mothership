@@ -51,11 +51,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   raycastOffset: 0.55
-  detectionDistance: 10
-  loseIntrestModifer: 1.25
+  detectionDistance: 75
+  loseIntrestModifer: 3
   thrusterStrength: 2000
-  wanderThrustDelay: 0.75
-  chaseThrustDelay: 0.01
+  wanderThrustDelay: 0.005
+  chaseThrustDelay: 0.05
   bulletPrefab: {fileID: 5260830861684943945, guid: 58f76f9037053a248b60ffad2c0e9458, type: 3}
   shootDelay: 2
   bulletSpawnOffset: 0.85

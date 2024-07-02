@@ -19,7 +19,7 @@ public class RogueBullet : MonoBehaviour
         Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("Player") || other.CompareTag("Mini Ship") || other.CompareTag("Enemy") || other.CompareTag("Planet")){
+        if(!other.name.Contains("Rogue Ship")&& (other.transform.CompareTag("Player") || other.transform.CompareTag("Mini Ship") || other.transform.CompareTag("Enemy"))){
             other.SendMessage("DamageEntity", damage, SendMessageOptions.DontRequireReceiver);
             Destroy(gameObject);
         }

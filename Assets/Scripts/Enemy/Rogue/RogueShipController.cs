@@ -60,7 +60,7 @@ public class RogueShipController : HealthSystem
         //check if the raycast hit anything
         if(lookInFront && !lookInFront.transform.name.Equals(gameObject.name)){
             //check if the ship sees an enemy
-            if(lookInFront.transform.CompareTag("Player") || lookInFront.transform.CompareTag("Mini Ship") || lookInFront.transform.CompareTag("Enemy")){
+            if(!lookInFront.transform.gameObject.name.Contains("Rogue Ship") && (lookInFront.transform.CompareTag("Player") || lookInFront.transform.CompareTag("Mini Ship") || lookInFront.transform.CompareTag("Enemy"))){
                 target = lookInFront.transform;
                 return true;
             }
@@ -85,7 +85,7 @@ public class RogueShipController : HealthSystem
             TryThrust(wanderLocation - transform.position);
         }else{
             //find a new location
-            wanderLocation = MapInformation.RandomLocation();
+            wanderLocation = MapInformation.RandomLocationAround(transform.position, 50);
         }
     }
     private void TryThrust(Vector3 direction){
