@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatsUIController : MonoBehaviour
 {
@@ -27,9 +28,11 @@ public class StatsUIController : MonoBehaviour
     [SerializeField] private GameObject statPopupPanel;
     private TextMeshProUGUI statText;
     private IEnumerator hideStatTimer;
-    //warning screen
+    //screen effects
     [SerializeField] private RectTransform warningScreen; 
-
+    [SerializeField] private Image blackoutScreen;
+    private bool doBlackout;
+    [SerializeField] private float blackoutRate;
     private void Awake() {
         healthBarValue = healthBar.GetChild(0).GetComponent<RectTransform>();
         miniShipBarValue = miniShipBar.GetChild(0).GetComponent<RectTransform>();
@@ -39,6 +42,7 @@ public class StatsUIController : MonoBehaviour
         statText = statPopupPanel.GetComponentInChildren<TextMeshProUGUI>();
         hideStatTimer = null;
         warningScreen.gameObject.SetActive(false);
+        blackoutScreen.gameObject.SetActive(false);
     }
     //Check if there are animations to do
     private void Update() {
@@ -51,6 +55,15 @@ public class StatsUIController : MonoBehaviour
             doMiniShipBarAnim = BounceBarOut(miniShipBar, miniShipBarAnimRate, miniShipBarAnimSize);
         }else{
             BounceBarIn(miniShipBar, miniShipBarAnimRate);
+        }
+        if(doBlackout){
+            Color blackoutShade = blackoutScreen.color;
+            blackoutShade.a -= blackoutRate * Time.deltaTime;
+            blackoutScreen.color = blackoutShade;
+            if(blackoutShade.a <= 0){
+                doBlackout = false;
+                blackoutScreen.gameObject.SetActive(false);
+            }
         }
     }
     private bool BounceBarOut(RectTransform bar, float growRate, float maxSize){
@@ -152,5 +165,12 @@ public class StatsUIController : MonoBehaviour
     }
     public void HideWarningScreen(){
         warningScreen.gameObject.SetActive(false);
+    }
+    public void DoBlackout(){
+        Color blackoutShade = blackoutScreen.color;
+        blackoutShade.a = 1;
+        blackoutScreen.color = blackoutShade;
+        blackoutScreen.gameObject.SetActive(true);
+        doBlackout = true;
     }
 }

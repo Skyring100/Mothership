@@ -177,6 +177,8 @@ public class MothershipController : HealthSystem
     private IEnumerator OutOfBoundsCountdown(){
         yield return new WaitForSeconds(outOfBoundsTimer);
         MoveInBounds();
+        statsUI.HideWarningScreen();
+        statsUI.DoBlackout();
     }
     private void MoveInBounds(){
         float offsetMultiplier = 0.9f;
