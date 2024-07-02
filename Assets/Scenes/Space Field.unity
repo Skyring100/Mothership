@@ -950,6 +950,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 4214638273377938060, guid: 0f328c70b3c9f8f45b97a3c2b3a83118, type: 3}
+  - {fileID: 8464061598189837563, guid: f7de229875fa7114f8a5e44851f72b49, type: 3}
+  - {fileID: 6184235491069879029, guid: 5bf475627530b2743b9b6384a3e6b838, type: 3}
+  - {fileID: 423326266840168960, guid: db4b5cffd8755f44b8083037427d508c, type: 3}
   minSpawnWait: 2
   maxSpawnWait: 5
   maxSpawnOffset: 36
@@ -980,12 +983,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b97f15ce1fc2ca4ab4b151e21e5f7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomOutRate: 0.25
+  zoomRate: 15
   maxZoomOut: 20
-  zoomInRate: 0.25
   baseZoom: 10
   background: {fileID: 1345270844}
   backgroundSpeed: 0.25
+  isZoomedOut: 0
 --- !u!1 &602376490
 GameObject:
   m_ObjectHideFlags: 0
