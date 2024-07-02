@@ -20,6 +20,7 @@ public class BonkerEnemyController : HealthSystem
         rb = GetComponent<Rigidbody2D>();
         detectScript = Instantiate(detection).GetComponentInChildren<GeneralDetectionHitbox>();
         detectScript.SetFollow(transform);
+        detectScript.SetRelativeSize(50);
         StartCoroutine(DoChargeCooldown());
         dealDamImmune = false;
     }
