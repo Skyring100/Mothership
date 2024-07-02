@@ -9,6 +9,12 @@ public class BomberAI : HealthSystem
     private BomberRadius radiusScr;
     [SerializeField] private float speed;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private Color normalColor;
+    [SerializeField] private Color flashColor;
+    private bool inFlashAnimation;
+    [SerializeField] private float flashDur;
+    [SerializeField] private float nextFlashDelay;
 
     protected override void OnDamage()
     {
@@ -32,6 +38,8 @@ public class BomberAI : HealthSystem
         radiusScr = GetComponentInChildren<BomberRadius>();
         //make the detection hitbox the same size as the max raduis for the explosion
         d.transform.localScale = new Vector3(radiusScr.maxRadius, radiusScr.maxRadius);
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void FixedUpdate() {
         if(detectScr.HasDetection()){
@@ -42,5 +50,16 @@ public class BomberAI : HealthSystem
             radiusScr.StopGrow();
             rb.velocity = new Vector2(0,0);
         }
+        if(!inFlashAnimation){
+            StartCoroutine(FlashAnimation());
+        }
+    }
+    private IEnumerator FlashAnimation(){
+        inFlashAnimation = true;
+        spriteRenderer.color = flashColor;
+        yield return new WaitForSeconds(flashDur);
+        spriteRenderer.color = normalColor;
+        yield return new WaitForSeconds(nextFlashDelay);
+        inFlashAnimation = false;
     }
 }

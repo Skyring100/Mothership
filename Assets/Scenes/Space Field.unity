@@ -949,7 +949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 6184235491069879029, guid: 5bf475627530b2743b9b6384a3e6b838, type: 3}
+  - {fileID: 4214638273377938060, guid: 0f328c70b3c9f8f45b97a3c2b3a83118, type: 3}
   minSpawnWait: 2
   maxSpawnWait: 5
   maxSpawnOffset: 36
@@ -2151,7 +2151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41, g: 0.037272714, b: 0.037272714, a: 1}
+  m_Color: {r: 0.21698111, g: 0.18934673, b: 0.18934673, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
