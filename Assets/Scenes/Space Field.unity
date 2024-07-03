@@ -980,12 +980,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b97f15ce1fc2ca4ab4b151e21e5f7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomOutRate: 0.25
+  zoomRate: 0
   maxZoomOut: 20
-  zoomInRate: 0.25
   baseZoom: 10
   background: {fileID: 1345270844}
-  backgroundSpeed: 0.25
+  backgroundSpeed: 2
+  isZoomedOut: 0
 --- !u!1 &602376490
 GameObject:
   m_ObjectHideFlags: 0
