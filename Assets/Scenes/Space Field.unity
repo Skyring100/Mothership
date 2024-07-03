@@ -1097,21 +1097,21 @@ MonoBehaviour:
   miniBulletSpeed: 0
   miniShootDelay: 0
   startMovSpeed: 500
-  startMiniShips: 3
+  startMiniShips: 5
   startMaxHealth: 20
   startMiniHealth: 2
   startMiniSpeed: 250
   startMiniDamage: 2
   startMiniBulletSpeed: 10
-  startMiniShootDelay: 2
+  startMiniShootDelay: 1
   maxMaxHealth: 100
   maxMovSpeed: 1000
-  maxMiniShips: 10
+  maxMiniShips: 20
   maxMiniHealth: 20
   maxMiniSpeed: 650
   maxMiniDamage: 35
   maxMiniBulletSpeed: 50
-  maxMiniShootDelay: 0.45
+  maxMiniShootDelay: 0.05
   goHereMarkerPrefab: {fileID: 8641900795125584402, guid: d9eac0eba1472304cb30f9d37faa1c6c, type: 3}
   ui: {fileID: 1353716675}
   landingDocs: {fileID: 305856180}

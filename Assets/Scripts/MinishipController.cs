@@ -7,7 +7,6 @@ public class MinishipController : HealthSystem
 {
     [SerializeField] private GameObject powerupPrefab;
     [SerializeField] private float planetHoverDist;
-    [SerializeField] private float playerHoverDist;
     [SerializeField] private float enemyShipHoverDist;
     [SerializeField] private float movSpeed;
     [SerializeField] private GameObject bulletPrefab;
@@ -25,7 +24,6 @@ public class MinishipController : HealthSystem
         //scale the drag with the movement speed so the ship doesn't fly out of control
         rb.drag = movSpeed/250;
         canShoot = true;
-        StartCoroutine(DoShootDelay());
         cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
     }
 
@@ -33,7 +31,8 @@ public class MinishipController : HealthSystem
         bool doneTask = false;
         Vector3 targetPos;
         //check if the mouse is being pressed down
-        if(tag.Equals("Mini Ship") && Input.GetMouseButton(0)){
+        if(CompareTag("Mini Ship") && Input.GetMouseButton(0)){
+            destinationOffset = 0;
             targetPos = cam.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
         }else if(objectives.Count != 0){
