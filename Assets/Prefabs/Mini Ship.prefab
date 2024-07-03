@@ -47,14 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b61442bb4d5b8b44857421b8f3a04d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6.642563
+  maxHealth: 4.949904
   powerupPrefab: {fileID: 0}
   planetHoverDist: 3
-  playerHoverDist: 5
   enemyShipHoverDist: 3
-  movSpeed: 678.0761
+  movSpeed: 250
   bulletPrefab: {fileID: 3127819314200739141, guid: 79243bf7316bb0d4385d242b7906e8d4, type: 3}
-  shootDelay: 1.053649
+  shootDelay: 1
   bulletPrefabScript: {fileID: 1529588959295352863, guid: 79243bf7316bb0d4385d242b7906e8d4, type: 3}
 --- !u!212 &4992618561474353287
 SpriteRenderer:

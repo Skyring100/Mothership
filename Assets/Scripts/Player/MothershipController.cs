@@ -273,14 +273,11 @@ public class MothershipController : HealthSystem
         ui.ChangeStat(CalcStatRatio(startMiniBulletSpeed, miniBulletSpeed, maxMiniBulletSpeed), 5);
     }
     public void ChangeMiniShootDelay(float v){
-        Debug.Log("Change by "+v);
         miniShootDelay -= v;
         miniShipPrefabScript.SetShootDelay(miniShootDelay);
-        float ratio = CalcStatRatio(startMiniShootDelay, miniShootDelay, 1/maxMiniShootDelay);
-        ui.ChangeStat(ratio, 6);
+        ui.ChangeStat(CalcStatRatio(startMiniShootDelay, miniShootDelay, 1/maxMiniShootDelay), 6);
     }
     private float CalcStatRatio(float starting,float current, float max){
-        //Debug.Log("Starting: "+starting+" Current: "+current+" Max: "+max);
         return (current-starting)/max;
     }
 }

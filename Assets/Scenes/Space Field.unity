@@ -1106,7 +1106,7 @@ MonoBehaviour:
   startMiniShootDelay: 1
   maxMaxHealth: 100
   maxMovSpeed: 1000
-  maxMiniShips: 20
+  maxMiniShips: 15
   maxMiniHealth: 20
   maxMiniSpeed: 650
   maxMiniDamage: 35
