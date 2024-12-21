@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinionTargetInfo
-{
+public class MinionTargetInfo{
     private Transform target;
     private Transform leader;
     public MinionTargetInfo(Transform t, Transform l){

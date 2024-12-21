@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RogueBullet : MonoBehaviour
-{
+public class RogueBullet : MonoBehaviour{
     [SerializeField] private float lifeTime;
     [SerializeField] private float damage;
     [SerializeField] private float speed;
-    private void Start() {
+    private void Start(){
         StartCoroutine(StartLifeTime());
     }
-    private void Update() {
+    private void Update(){
         transform.position += transform.up * speed * Time.deltaTime;
     }
 

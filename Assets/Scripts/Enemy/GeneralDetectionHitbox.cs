@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GeneralDetectionHitbox : MonoBehaviour
-{
+public class GeneralDetectionHitbox : MonoBehaviour{
     private Transform followThis;
     [SerializeField] private string[] detectTags;
     private Transform currentDetection;
@@ -12,7 +11,7 @@ public class GeneralDetectionHitbox : MonoBehaviour
     private void Start() {
         hasDetection = false;
     }
-    private void Update() {
+    private void Update(){
         if(followThis != null){
             if(!followThis.IsDestroyed()){
                 transform.position = followThis.position;

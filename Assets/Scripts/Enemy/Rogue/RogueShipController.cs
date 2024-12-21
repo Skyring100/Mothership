@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class RogueShipController : HealthSystem
-{
+public class RogueShipController : HealthSystem{
     [SerializeField] private float raycastOffset;
     private Transform target;
     [SerializeField] private float detectionDistance;
@@ -22,7 +21,7 @@ public class RogueShipController : HealthSystem
     private Transform leftWing;
     private Transform rightWing;
     private bool canShoot;
-    private void Start() {
+    private void Start(){
         wanderLocation = MapInformation.RandomLocation();
         rb = GetComponent<Rigidbody2D>();
         thrusterReady = true;
@@ -33,8 +32,7 @@ public class RogueShipController : HealthSystem
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         if(!seesTarget){
             //wander around
             DoWander();
@@ -121,13 +119,11 @@ public class RogueShipController : HealthSystem
         transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
     }
 
-    protected override void OnDamage()
-    {
+    protected override void OnDamage(){
         return;
     }
 
-    protected override void OnDeath()
-    {
+    protected override void OnDeath(){
         Destroy(gameObject);
     }
 }

@@ -2,23 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnvironmentSpawner : MonoBehaviour
-{
+public class EnvironmentSpawner : MonoBehaviour{
     [SerializeField] private float spawnDelay;
     private bool canSpawn;
     [SerializeField] private GameObject planetPrefab;
     [SerializeField] private int startingPlanets;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         for(int i = 1; i <= startingPlanets; i++){
             SpawnPlanet();
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         if(canSpawn){
             SpawnPlanet();
         }

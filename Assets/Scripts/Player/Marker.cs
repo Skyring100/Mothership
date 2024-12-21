@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Marker : MonoBehaviour
-{
+public class Marker : MonoBehaviour{
     [SerializeField] private float lifeTime;
     private void Start() {
         StartCoroutine(DoLifeTime());
@@ -12,7 +11,7 @@ public class Marker : MonoBehaviour
         yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other){
         if(other.CompareTag("Mini Ship")){
             Destroy(gameObject);
         }

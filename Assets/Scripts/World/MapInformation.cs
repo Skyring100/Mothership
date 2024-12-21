@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class MapInformation
-{
+public class MapInformation{
     private static int[] mapSize = new int[]{100,100};
     public static bool IsOutOfBounds(Vector3 pos){
         return Mathf.Abs(pos.x) > mapSize[0] || Mathf.Abs(pos.y) > mapSize[1];

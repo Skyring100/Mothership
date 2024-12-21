@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
-public class MothershipController : HealthSystem
-{
+public class MothershipController : HealthSystem{
     /*
     TODO
     -Make mini ships auto target enemies
@@ -56,8 +55,7 @@ public class MothershipController : HealthSystem
     private void Awake() {
         Physics2D.queriesHitTriggers = false;
     }
-    void Start()
-    {
+    void Start(){
         rb = GetComponent<Rigidbody2D>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         miniShipPrefabScript = miniShipPrefab.GetComponent<MinishipController>();
@@ -83,8 +81,7 @@ public class MothershipController : HealthSystem
         currentlyOutOfBounds = false;
     }
 
-    void Update()
-    {
+    void Update(){
         DoMovement();
         ClickCheck();
         if(Input.GetKeyDown(KeyCode.R)){

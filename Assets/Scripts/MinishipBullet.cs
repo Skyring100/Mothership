@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MinishipBullet : MonoBehaviour
-{
+public class MinishipBullet : MonoBehaviour{
     [SerializeField] private float speed;
     [SerializeField] private float lifeTime;
     [SerializeField] private string[] damageableTags;
     [SerializeField] private float damage;
-    private void Start() {
+    private void Start(){
         StartCoroutine(StartLifeTime());
     }
-    private void Update() {
+    private void Update(){
         transform.position += transform.up * speed * Time.deltaTime;
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other){
         //check if this bullet hit an enemy
         for(int i = 0; i < damageableTags.Length; i++){
             if(other.CompareTag(damageableTags[i])){

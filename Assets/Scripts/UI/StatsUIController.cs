@@ -5,8 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerUIController : MonoBehaviour
-{
+public class PlayerUIController : MonoBehaviour{
     [SerializeField] private float infoBarFullSize;
     //health bar
     [SerializeField] private RectTransform healthBar;
@@ -34,7 +33,7 @@ public class PlayerUIController : MonoBehaviour
     private bool doBlackout;
     [SerializeField] private float blackoutRate;
     [SerializeField] private RectTransform deathScreen;
-    private void Awake() {
+    private void Awake(){
         healthBarValue = healthBar.GetChild(0).GetComponent<RectTransform>();
         miniShipBarValue = miniShipBar.GetChild(0).GetComponent<RectTransform>();
         miniShipText = miniShipBar.GetChild(1).GetComponent<TextMeshProUGUI>();
@@ -47,7 +46,7 @@ public class PlayerUIController : MonoBehaviour
         deathScreen.gameObject.SetActive(false);
     }
     //Check if there are animations to do
-    private void Update() {
+    private void Update(){
         if(doHealthBarAnim){
             doHealthBarAnim = BounceBarOut(healthBar, healthBarAnimRate, healthBarAnimSize);
         }else{

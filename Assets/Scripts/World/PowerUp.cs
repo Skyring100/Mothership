@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUp : MonoBehaviour
-{
+public class PowerUp : MonoBehaviour{
     [SerializeField] private float maxUpgradeMagnitude;
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other){
         if(other.CompareTag("Player")){
             MothershipController ship = other.GetComponent<MothershipController>();
             int choice = Random.Range(0,8);

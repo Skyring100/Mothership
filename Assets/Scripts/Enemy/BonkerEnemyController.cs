@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BonkerEnemyController : HealthSystem
-{
+public class BonkerEnemyController : HealthSystem{
     [SerializeField] private GameObject powerupPrefab;
     [SerializeField] private float chargeForce;
     [SerializeField] private float damage;
@@ -15,8 +14,7 @@ public class BonkerEnemyController : HealthSystem
     [SerializeField] private GameObject detection;
     private GeneralDetectionHitbox detectScript;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         rb = GetComponent<Rigidbody2D>();
         detectScript = Instantiate(detection).GetComponentInChildren<GeneralDetectionHitbox>();
         detectScript.SetFollow(transform);
@@ -26,8 +24,7 @@ public class BonkerEnemyController : HealthSystem
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
+    void FixedUpdate(){
         Vector3 movDir;
         if(detectScript.HasDetection()){
             movDir = detectScript.GetDetection().position - transform.position;
@@ -45,13 +42,11 @@ public class BonkerEnemyController : HealthSystem
         canCharge = true;
     }
 
-    protected override void OnDamage()
-    {
+    protected override void OnDamage(){
         return;
     }
 
-    protected override void OnDeath()
-    {
+    protected override void OnDeath(){
         if(Random.Range(0,2) == 0){
             Instantiate(powerupPrefab, transform.position, Quaternion.identity);
         }

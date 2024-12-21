@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MinishipController : HealthSystem
-{
+public class MinishipController : HealthSystem{
     [SerializeField] private GameObject powerupPrefab;
     [SerializeField] private float planetHoverDist;
     [SerializeField] private float enemyShipHoverDist;
@@ -153,13 +152,11 @@ public class MinishipController : HealthSystem
         canShoot = true;
     }
 
-    protected override void OnDamage()
-    {
+    protected override void OnDamage(){
         return;
     }
 
-    protected override void OnDeath()
-    {
+    protected override void OnDeath(){
         if(leader != null && !leader.IsDestroyed()){
             leader.SendMessage("ShipReturned", this);
         }else{

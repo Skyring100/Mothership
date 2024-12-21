@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnController : MonoBehaviour
-{
+public class EnemySpawnController : MonoBehaviour{
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private int minSpawnWait = 5;
     [SerializeField] private int maxSpawnWait = 15;

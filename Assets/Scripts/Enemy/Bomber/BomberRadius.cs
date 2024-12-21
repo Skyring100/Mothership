@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BomberRadius : MonoBehaviour
-{
+public class BomberRadius : MonoBehaviour{
     [SerializeField] public float maxRadius;
     [SerializeField] public float growRate;
     [SerializeField] private float explosionLifetime;
