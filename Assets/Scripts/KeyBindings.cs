@@ -10,6 +10,7 @@ public class KeyBindings : MonoBehaviour{
         keyBindings.Add("Return Ships", KeyCode.R);
         keyBindings.Add("Explode Ships", KeyCode.T);
         keyBindings.Add("Toggle Stats", KeyCode.V);
+        keyBindings.Add("Toggle Zoom", KeyCode.Space);
     }
     public static KeyCode GetKeybind(string name){
         return keyBindings[name];

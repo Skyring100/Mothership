@@ -26,7 +26,7 @@ public class MainMenuUI : MonoBehaviour{
         controlsScreen.SetActive(true);
         if(!keybindDescriptAdded){
             KeyBindings.DefaultKeybinds();
-            int nextYPos = 400;
+            int nextYPos = 470;
             foreach(KeyValuePair<string, KeyCode> key in KeyBindings.keyBindings){
                 GameObject button = Instantiate(menuButtonPrefab);
                 button.transform.SetParent(controlsScreen.transform, false);

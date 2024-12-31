@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour{
         if(!player.IsDestroyed()){
             transform.position = new Vector3(player.position.x, player.position.y, -10);
         }
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyBindings.GetKeybind("Toggle Zoom"))){
             isZoomedOut = !isZoomedOut;
         }
         if(isZoomedOut){
