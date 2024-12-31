@@ -30,7 +30,7 @@ public class MinishipController : HealthSystem{
         bool doneTask = false;
         Vector3 targetPos;
         //check if the mouse is being pressed down
-        if(CompareTag("Mini Ship") && Input.GetMouseButton(0)){
+        if(CompareTag("Mini Ship") && Input.GetKey(KeyBindings.GetKeybind("Deploy Ship"))){
             destinationOffset = 0;
             targetPos = cam.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
@@ -126,7 +126,7 @@ public class MinishipController : HealthSystem{
         //return to the leader if no more objectives
         if(other.Equals(leader) && objectives.Count == 0){
             //if owned by player, make sure mouse isnt being pressed
-            if(!CompareTag("Mini Ship") || !Input.GetMouseButton(0)){
+            if(!CompareTag("Mini Ship") || !Input.GetKey(KeyBindings.GetKeybind("Deploy Ship"))){
                 leader.SendMessage("ShipReturned", this);
             }
         }

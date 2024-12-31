@@ -52,7 +52,7 @@ public class MothershipController : HealthSystem{
     [SerializeField] private string[] targetableTags;
     private bool currentlyOutOfBounds;
     [SerializeField] private float outOfBoundsTimer;
-    private void Awake() {
+    private void Awake(){
         Physics2D.queriesHitTriggers = false;
     }
     void Start(){
@@ -84,15 +84,15 @@ public class MothershipController : HealthSystem{
     void Update(){
         DoMovement();
         ClickCheck();
-        if(Input.GetKeyDown(KeyCode.R)){
+        if(Input.GetKeyDown(KeyBindings.GetKeybind("Return Ships"))){
             foreach(MinishipController script in miniShipsExisting){
                 script.ClearObjectives();
             }
         }
-        if(Input.GetKeyDown(KeyCode.V)){
+        if(Input.GetKeyDown(KeyBindings.GetKeybind("Toggle Stats"))){
             StatsUIToggle();
         }
-        if(Input.GetKeyDown(KeyCode.T)){
+        if(Input.GetKeyDown(KeyBindings.GetKeybind("Explode Ships"))){
             ExplodeAllShips();
         }
         OutOfBoundsCheck();
@@ -106,7 +106,7 @@ public class MothershipController : HealthSystem{
     }
     private void ClickCheck(){
         Vector3 mouseLoc = cam.ScreenToWorldPoint(Input.mousePosition);
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetKeyDown(KeyBindings.GetKeybind("Deploy Ship"))){
             //get what the mouse clicked on
             RaycastHit2D detections = Physics2D.Raycast(mouseLoc, Vector3.back);
             //check if there is either nothing clicked or the clicked object is not targetable
@@ -123,7 +123,7 @@ public class MothershipController : HealthSystem{
                 SpawnMiniship(detections.transform);
             }
         }
-        if(Input.GetMouseButtonDown(1)){
+        if(Input.GetKeyDown(KeyBindings.GetKeybind("All Target"))){
             //get what the mouse clicked on
             RaycastHit2D detections = Physics2D.Raycast(mouseLoc, Vector3.back);
             if(detections && IsTargetable(detections.transform)){
