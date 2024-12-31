@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerUIController : MonoBehaviour{
@@ -176,5 +177,8 @@ public class PlayerUIController : MonoBehaviour{
     }
     public void ShowDeathScreen(){
         deathScreen.gameObject.SetActive(true);
+    }
+    public void RestartGame(){
+        SceneManager.LoadScene("Space Field");
     }
 }
